@@ -26,7 +26,7 @@ export const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Quiz",
-    href: "quiz?categories=science&difficulty=easy&limit=10",
+    href: "quiz?limit=10&categories=science&difficulty=easy",
   },
   {
     label: "Custom Quiz",
@@ -70,4 +70,11 @@ export const CARD_DATA = [
       "Invite friends or colleagues to help you create quizzes or contribute questions. You can also create quiz groups to share quizzes and collaborate with others on quiz creation.",
     icon: RiTeamFill,
   },
+];
+
+export const END_QUIZ_TEXT = [
+  "WOW! Look at that!",
+  "You are awesome!",
+  "Congrats!",
+  "You nailed it!",
 ];
