@@ -63,7 +63,7 @@ export const useQuiz = () => {
     }
 
     getApiData();
-  }, [router.isReady]);
+  }, [router.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     isLoading,
