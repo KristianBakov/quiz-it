@@ -26,7 +26,7 @@ export const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Quiz",
-    href: "quiz?limit=10&categories=science&difficulty=easy",
+    href: "quiz?limit=10&categories=arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure&difficulty=medium",
   },
   {
     label: "Custom Quiz",

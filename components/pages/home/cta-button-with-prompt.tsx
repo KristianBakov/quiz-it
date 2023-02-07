@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
+import { NAV_ITEMS } from "../../../common/constants";
 
 export const CTAButtonWithPrompt = () => {
   return (
@@ -30,7 +31,7 @@ export const CTAButtonWithPrompt = () => {
         borderRadius={20}
         py={2}
         px={5}
-        href="quiz"
+        href={NAV_ITEMS[1].href}
         m="0 auto"
         bgColor="pink.500"
         color="white"
@@ -40,7 +41,7 @@ export const CTAButtonWithPrompt = () => {
       >
         Take a random quiz
       </ChakraLink>
-      <Box>
+      <Box display={{ base: "none", md: "block" }}>
         <Icon
           as={Arrow}
           color={useColorModeValue("gray.800", "gray.300")}
@@ -57,7 +58,7 @@ export const CTAButtonWithPrompt = () => {
           top={"-15px"}
           transform={"rotate(10deg)"}
         >
-          It's one click away!
+          It&apos;s one click away!
         </Text>
       </Box>
     </Stack>

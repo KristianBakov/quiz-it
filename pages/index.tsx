@@ -23,10 +23,10 @@ export default function Home() {
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            Puzzle your brain and test your knowledge with Quiz it`&apos`s wide
+            Puzzle your brain and test your knowledge with Quiz it&apos;s wide
             range of trivia on various topics. Compete with friends to see who
             can earn the most points, or play solo and learn something new. No
-            matter how you choose to use Quiz it, it`&apos`s a great way to keep
+            matter how you choose to use Quiz it, it&apos;s a great way to keep
             your brain active.
           </Text>
 
