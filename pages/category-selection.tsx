@@ -1,8 +1,5 @@
 import {
   Box,
-  Button,
-  Checkbox,
-  CheckboxGroup,
   Container,
   Heading,
   Radio,
@@ -16,9 +13,10 @@ import {
   Tooltip,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, ChangeEvent } from "react";
 import Link from "next/link";
 import { categories } from "../common/constants";
+import CategorySelectionCheckboxGroup from "../components/pages/category-selection/category-selection-checkbox-group";
 
 const CategorySelection = () => {
   const [sliderValue, setSliderValue] = React.useState(10);
@@ -29,38 +27,20 @@ const CategorySelection = () => {
   );
   const difficultyRef = useRef("medium");
 
+  const handleCheckboxToggle = (e: ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+
+    e.target.checked
+      ? categoriesRef.current.add(val)
+      : categoriesRef.current.delete(val);
+  };
+
   return (
     <Container as="main" maxW={"2xl"} my={20}>
       <Stack direction="row" justifyContent="space-between">
-        <Box>
-          <Heading mb={3} as="h2" size="md">
-            Select Categories:
-          </Heading>
-          <Stack spacing={3} direction="column">
-            <CheckboxGroup
-              colorScheme="pink"
-              defaultValue={[categories[5][1], categories[7][1]]}
-            >
-              {categories.map(([label, value], index) => {
-                return (
-                  <Checkbox
-                    value={value}
-                    onChange={(e) => {
-                      const val = e.target.value;
-
-                      e.target.checked
-                        ? categoriesRef.current.add(val)
-                        : categoriesRef.current.delete(val);
-                    }}
-                    key={index}
-                  >
-                    {label}
-                  </Checkbox>
-                );
-              })}
-            </CheckboxGroup>
-          </Stack>
-        </Box>
+        <CategorySelectionCheckboxGroup
+          handleCheckboxToggle={handleCheckboxToggle}
+        />
 
         <Box>
           <Heading mb={3} as="h2" size="md">

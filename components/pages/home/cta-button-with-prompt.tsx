@@ -1,13 +1,11 @@
 import {
   Stack,
-  Button,
   Icon,
   useColorModeValue,
   createIcon,
   Box,
   Link as ChakraLink,
   Text,
-  SlideFade,
 } from "@chakra-ui/react";
 import React from "react";
 import Link from "next/link";
