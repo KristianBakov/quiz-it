@@ -1,25 +1,19 @@
-import {
-  Container,
-  Radio,
-  RadioGroup,
-  Stack,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
+import { Container, Radio, RadioGroup, Stack, Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useRef, useState, ChangeEvent } from "react";
-import Link from "next/link";
-import { categories } from "../common/constants";
+import { categories, difficultyLevels } from "../common/constants";
 import CategorySelectionCheckboxGroup from "../components/pages/category-selection/category-selection-checkbox-group";
 import CategorySelectionRadioGroup from "../components/pages/category-selection/category-selection-radio-section";
 import CategorySelectionSlider from "../components/pages/category-selection/category-selection-slider";
 
 const CategorySelection = () => {
   const [sliderValue, setSliderValue] = React.useState(10);
-
   const [isLoading, setIsLoading] = useState(false);
   const categoriesRef = useRef<Set<string>>(
     new Set<string>([categories[5][1], categories[7][1]])
   );
-  const difficultyRef = useRef("medium");
+  const router = useRouter();
+  const difficultyRef = useRef<string>(difficultyLevels[1][1]);
 
   const handleCheckboxToggle = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -43,9 +37,17 @@ const CategorySelection = () => {
             colorScheme="pink"
           >
             <Stack spacing={5} direction="column">
-              <Radio value="easy">Easy</Radio>
+              {difficultyLevels.map((difficultyLevel) => {
+                return (
+                  <Radio value={difficultyLevel[1]} key={difficultyLevel[1]}>
+                    {difficultyLevel[0]}
+                  </Radio>
+                );
+              })}
+
+              {/* <Radio value={difficultyLevels[0][1]}>Easy</Radio>
               <Radio value="medium">Medium</Radio>
-              <Radio value="hard">Hard</Radio>
+              <Radio value="hard">Hard</Radio> */}
             </Stack>
           </RadioGroup>
         </CategorySelectionRadioGroup>
@@ -56,25 +58,21 @@ const CategorySelection = () => {
         setSliderValue={setSliderValue}
       />
 
-      <ChakraLink
-        as={Link}
-        width="fit-content"
-        fontWeight={600}
+      <Button
         display="block"
-        textAlign="center"
-        borderRadius={8}
-        py={2}
-        px={5}
         m="0 auto"
         bgColor="pink.500"
-        color="white"
-        href={`quiz?categories=${Array.from(categoriesRef.current).join(
-          ","
-        )}&difficulty=${difficultyRef.current}&limit=${sliderValue}`}
-        onClick={() => setIsLoading(true)}
+        onClick={() => {
+          setIsLoading(true);
+          router.push(
+            `quiz?categories=${Array.from(categoriesRef.current).join(
+              ","
+            )}&difficulty=${difficultyRef.current}&limit=${sliderValue}`
+          );
+        }}
       >
         {isLoading ? "Redirecting..." : "QUIZ IT!"}
-      </ChakraLink>
+      </Button>
     </Container>
   );
 };

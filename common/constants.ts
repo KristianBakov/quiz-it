@@ -51,6 +51,12 @@ export const categories = [
   ["Sport & Leisure", "sport_and_leisure"],
 ] as const;
 
+export const difficultyLevels = [
+  ["Easy", "easy"],
+  ["Medium", "medium"],
+  ["Hard", "hard"],
+] as const;
+
 export const CARD_DATA = [
   {
     title: "Puzzle it",
