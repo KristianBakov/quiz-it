@@ -1,26 +1,20 @@
 import {
-  Box,
   Container,
-  Heading,
   Radio,
   RadioGroup,
-  Slider,
-  SliderFilledTrack,
-  SliderMark,
-  SliderThumb,
-  SliderTrack,
   Stack,
-  Tooltip,
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import React, { useRef, useState, ChangeEvent } from "react";
 import Link from "next/link";
 import { categories } from "../common/constants";
 import CategorySelectionCheckboxGroup from "../components/pages/category-selection/category-selection-checkbox-group";
+import CategorySelectionRadioGroup from "../components/pages/category-selection/category-selection-radio-section";
+import CategorySelectionSlider from "../components/pages/category-selection/category-selection-slider";
 
 const CategorySelection = () => {
   const [sliderValue, setSliderValue] = React.useState(10);
-  const [showTooltip, setShowTooltip] = React.useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const categoriesRef = useRef<Set<string>>(
     new Set<string>([categories[5][1], categories[7][1]])
@@ -42,10 +36,7 @@ const CategorySelection = () => {
           handleCheckboxToggle={handleCheckboxToggle}
         />
 
-        <Box>
-          <Heading mb={3} as="h2" size="md">
-            Select Difficulty:
-          </Heading>
+        <CategorySelectionRadioGroup>
           <RadioGroup
             onChange={(e) => (difficultyRef.current = e)}
             defaultValue={difficultyRef.current}
@@ -57,47 +48,13 @@ const CategorySelection = () => {
               <Radio value="hard">Hard</Radio>
             </Stack>
           </RadioGroup>
-        </Box>
+        </CategorySelectionRadioGroup>
       </Stack>
 
-      <Box my={10}>
-        <Heading mb={3} as="h2" size="md">
-          Number of Questions
-        </Heading>
-        <Slider
-          id="slider"
-          value={sliderValue}
-          min={1}
-          max={20}
-          colorScheme="pink"
-          onChange={(v) => setSliderValue(v)}
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
-        >
-          <SliderMark value={1} mt="1" ml="-2.5" fontSize="sm">
-            1
-          </SliderMark>
-          <SliderMark value={10} mt="1" ml="-2.5" fontSize="sm">
-            10
-          </SliderMark>
-          <SliderMark value={20} mt="1" ml="-2.5" fontSize="sm">
-            20
-          </SliderMark>
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
-          <Tooltip
-            hasArrow
-            bg="pink.500"
-            color="white"
-            placement="top"
-            isOpen={showTooltip}
-            label={`${sliderValue}`}
-          >
-            <SliderThumb />
-          </Tooltip>
-        </Slider>
-      </Box>
+      <CategorySelectionSlider
+        sliderValue={sliderValue}
+        setSliderValue={setSliderValue}
+      />
 
       <ChakraLink
         as={Link}
