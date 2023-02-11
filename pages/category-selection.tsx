@@ -44,10 +44,6 @@ const CategorySelection = () => {
                   </Radio>
                 );
               })}
-
-              {/* <Radio value={difficultyLevels[0][1]}>Easy</Radio>
-              <Radio value="medium">Medium</Radio>
-              <Radio value="hard">Hard</Radio> */}
             </Stack>
           </RadioGroup>
         </CategorySelectionRadioGroup>
