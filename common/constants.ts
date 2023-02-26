@@ -1,23 +1,7 @@
 import { FaSlideshare } from "react-icons/fa";
 import { IoIosCreate } from "react-icons/io";
 import { RiTeamFill } from "react-icons/ri";
-
-export interface NavItem {
-  label: string;
-  href: string;
-}
-
-declare global {
-  interface Array<T> {
-    shuffle(): Array<T>;
-  }
-}
-
-Array.prototype.shuffle = function <T>(this: Array<T>): Array<T> {
-  return this.map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-};
+import { NavItem } from "./interfaces";
 
 export const NAV_ITEMS: Array<NavItem> = [
   {
