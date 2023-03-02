@@ -4,8 +4,9 @@ import {
   Link as ChakraLink,
   Box,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { NAV_ITEMS, NavItem } from "../../../../common/constants";
+import { Link } from "react-router-dom";
+import { NAV_ITEMS } from "../../../../common/constants";
+import { NavItem } from "../../../../common/interfaces";
 
 export const MobileNav = () => {
   return (
@@ -26,7 +27,7 @@ const MobileNavItem = ({ label, href }: NavItem) => {
     <Box py={2}>
       <ChakraLink
         as={Link}
-        href={href ?? "#"}
+        to={href ?? "#"}
         fontWeight={600}
         color={useColorModeValue("gray.600", "gray.200")}
       >

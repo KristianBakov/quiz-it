@@ -1,7 +1,5 @@
-import { Container, Heading, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import Logo from "assets/icons/main-logo.png";
-import Image from "next/image";
+import { Container, Heading, Stack, Text, Image } from "@chakra-ui/react";
+import Logo from "../assets/icons/main-logo.png";
 
 const About = () => {
   return (

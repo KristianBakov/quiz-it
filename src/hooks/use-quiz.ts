@@ -1,18 +1,28 @@
-import { useRouter } from "next/router";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Question } from "../common/interfaces";
+
+declare global {
+  interface Array<T> {
+    shuffle(): Array<T>;
+  }
+}
+
+Array.prototype.shuffle = function <T>(this: Array<T>): Array<T> {
+  return this.map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+};
 
 export const useQuiz = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [questions, setQuestions] = useState<Array<Question>>();
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0);
-  const [score, SetScore] = useState(0);
+  const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const currentQuestion = questions?.[currentQuestionNumber];
-
-  const isMountedRef = useRef(false);
-  const router = useRouter();
 
   const shuffledAnswers = useMemo(
     () =>
@@ -29,7 +39,7 @@ export const useQuiz = () => {
     setSelectedAnswer(answer);
 
     if (answer === currentQuestion?.correctAnswer) {
-      SetScore((prevValue) => prevValue + 1);
+      setScore((prevValue) => prevValue + 1);
     }
   };
 
@@ -39,9 +49,10 @@ export const useQuiz = () => {
   };
 
   useEffect(() => {
-    if (!router.isReady || isMountedRef.current) return;
     async function getApiData() {
-      const { limit, categories, difficulty } = router.query;
+      const limit = searchParams.get("limit");
+      const categories = searchParams.get("categories");
+      const difficulty = searchParams.get("difficulty");
 
       const response = await fetch(
         `https://the-trivia-api.com/api/questions?limit=${
@@ -59,11 +70,10 @@ export const useQuiz = () => {
 
       setQuestions(data);
       setIsLoading(false);
-      isMountedRef.current = true;
     }
 
     getApiData();
-  }, [router.isReady]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     isLoading,

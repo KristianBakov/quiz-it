@@ -7,8 +7,7 @@ import {
   Link as ChakraLink,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { NAV_ITEMS } from "../../../common/constants";
 
 export const CTAButtonWithPrompt = () => {
@@ -29,7 +28,7 @@ export const CTAButtonWithPrompt = () => {
         borderRadius={20}
         py={2}
         px={5}
-        href={NAV_ITEMS[1].href}
+        to={NAV_ITEMS[1].href}
         m="0 auto"
         bgColor="pink.500"
         color="white"

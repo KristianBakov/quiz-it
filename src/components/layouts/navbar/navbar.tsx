@@ -7,11 +7,11 @@ import {
   useColorModeValue,
   useDisclosure,
   useColorMode,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import Logo from "assets/icons/main-logo.png";
-import Image from "next/image";
-import Link from "next/link";
+import Logo from "../../../assets/icons/main-logo.png";
+import { Link } from "react-router-dom";
 import { DesktopNav } from "./components/desktop-nav";
 import { MobileNav } from "./components/mobile-nav";
 
@@ -42,8 +42,8 @@ export default function Navbar() {
           aria-label={"Toggle Mobile Navigation"}
         />
 
-        <ChakraLink as={Link} aria-label="Navigate to homepage" href="/">
-          <Image src={Logo} alt="quiz-it" height={64} />
+        <ChakraLink as={Link} aria-label="Navigate to homepage" to="/">
+          <Image src={Logo} alt="quiz-it" height="64px" />
         </ChakraLink>
 
         <DesktopNav />

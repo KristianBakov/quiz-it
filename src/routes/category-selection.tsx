@@ -1,6 +1,6 @@
 import { Container, Radio, RadioGroup, Stack, Button } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import React, { useRef, useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { categories, difficultyLevels } from "../common/constants";
 import CategorySelectionCheckboxGroup from "../components/pages/category-selection/category-selection-checkbox-group";
 import CategorySelectionRadioGroup from "../components/pages/category-selection/category-selection-radio-section";
@@ -12,8 +12,8 @@ const CategorySelection = () => {
   const categoriesRef = useRef<Set<string>>(
     new Set<string>([categories[5][1], categories[7][1]])
   );
-  const router = useRouter();
   const difficultyRef = useRef<string>(difficultyLevels[1][1]);
+  const navigate = useNavigate();
 
   const handleCheckboxToggle = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -60,8 +60,8 @@ const CategorySelection = () => {
         bgColor="pink.500"
         onClick={() => {
           setIsLoading(true);
-          router.push(
-            `quiz?categories=${Array.from(categoriesRef.current).join(
+          navigate(
+            `/quiz?categories=${Array.from(categoriesRef.current).join(
               ","
             )}&difficulty=${difficultyRef.current}&limit=${sliderValue}`
           );

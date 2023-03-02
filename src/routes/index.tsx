@@ -2,7 +2,7 @@ import { Heading, Container, Text, Stack } from "@chakra-ui/react";
 import FadeIn from "../components/fade-in";
 import { CTAButtonWithPrompt } from "../components/pages/home/cta-button-with-prompt";
 
-export default function Home() {
+export default function Index() {
   return (
     <Container as="main" maxW={"3xl"}>
       <FadeIn>
