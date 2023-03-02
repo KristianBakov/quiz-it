@@ -1,4 +1,10 @@
-import { Box, Link, Stack, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Link as ChakraLink,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { NAV_ITEMS } from "../../../../common/constants";
 
 export const DesktopNav = () => {
@@ -16,9 +22,10 @@ export const DesktopNav = () => {
     >
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Link
+          <ChakraLink
+            as={Link}
             p={2}
-            href={navItem.href ?? "#"}
+            to={navItem.href ?? "#"}
             fontSize={"sm"}
             fontWeight={500}
             color={linkColor}
@@ -28,7 +35,7 @@ export const DesktopNav = () => {
             }}
           >
             {navItem.label}
-          </Link>
+          </ChakraLink>
         </Box>
       ))}
     </Stack>
